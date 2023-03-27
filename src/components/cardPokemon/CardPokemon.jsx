@@ -5,18 +5,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-export default function CardPokemon() {
+export default function CardPokemon({ pokemon }) {
 
 	return (
 		<Card sx={{ maxWidth: 345 }}>
 			<CardMedia
 				sx={{ height: 140 }}
-				image={"https://turistandonline.files.wordpress.com/2017/06/pikachu.jpg"}
-				// title={nome}
+				image={pokemon.sprites.front_default}
+				title={pokemon.species.name}
 			/>
 			<CardContent>
 				<Typography className='nomePokemon' gutterBottom variant="h5" component="div">
-					{"nome"}
+					{pokemon.species.name}
 				</Typography>
 			</CardContent>
 			<CardActions>

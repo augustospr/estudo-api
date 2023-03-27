@@ -8,22 +8,42 @@ import { useState } from "react";
 
 export default function Home() {
 
-  const url = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=0";
+  // const url = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=0";
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await fetch(url);
+  //     const json = await data.json();
+  //     return json;
+  //   }
+  //   const result = fetchData()
+  //     .catch(console.error);;
+  //   setData(result);
+  // }, []);
+
+  // console.log(data);
 
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch(url);
-      const json = await data.json();
-      return json;
-    }
-    const result = fetchData()
-      .catch(console.error);;
-    setData(result);
-  }, [])
+    getApiData();
+  }, []);
 
-  console.log(data);
+  const getApiData = async () => {
+    try {
+      const endpoints = [];
+      for (var i = 1; i <= 51; i++) {
+        endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+      };
+      await Promise.all(endpoints.map((endpoint) => fetch(endpoint)))
+        .then((res) => Promise.all(res.map(async r => r.json())))
+        .then((res) => {
+          setData(res);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -32,9 +52,11 @@ export default function Home() {
           <Cabecalho />
           <PesquisaPokemon />
 
-          <Grid item xs={12} sm={4} md={2}>
-            <CardPokemon />
-          </Grid>
+          {data.map(pokemon => (
+            <Grid item xs={12} sm={4} md={2}>
+              <CardPokemon pokemon={pokemon} />
+            </Grid>
+          ))}
 
         </Grid>
       </Container>
