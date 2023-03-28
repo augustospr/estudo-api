@@ -54,7 +54,7 @@ export default function Home() {
 
           {data.map(pokemon => (
             <Grid item xs={12} sm={4} md={2}>
-              <CardPokemon pokemon={pokemon} />
+              <CardPokemon pokemon={pokemon} types={pokemon.types} />
             </Grid>
           ))}
 
