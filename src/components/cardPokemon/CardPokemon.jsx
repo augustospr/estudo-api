@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 export default function CardPokemon({ pokemon, types }) {
 
 	const typeHandler = () => {
-		if (types[1]) {
+		if (types[1].type.name) {
 			return types[0].type.name + " | " + types[1].type.name;
 		}
 		else {
