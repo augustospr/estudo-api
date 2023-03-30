@@ -21,11 +21,11 @@ export default function CardPokemon({ pokemon, types }) {
 			<CardMedia
 				sx={{ height: 140 }}
 				image={pokemon.sprites.front_default}
-				title={pokemon.species.name}
+				title={pokemon.name}
 			/>
 			<CardContent>
 				<Typography className='nomePokemon' gutterBottom variant="h5" component="div">
-					{pokemon.species.name}
+					{pokemon.name}
 				</Typography>
 			</CardContent>
 			<CardActions>

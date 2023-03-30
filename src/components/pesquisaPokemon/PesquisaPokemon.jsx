@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Grid, IconButton, InputBase, Paper } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function PesquisaPokemon() {
+export default function PesquisaPokemon({ pokemonFilter }) {
 	return (
 		<Container maxWidth="lg" sx={{ padding: "0px 16px 0px 26px", marginBottom: "40px" }}>
 			<Grid container justifyContent={"center"}>
@@ -13,7 +13,7 @@ export default function PesquisaPokemon() {
 					<InputBase
 						sx={{ ml: 1, flex: 1 }}
 						placeholder="Pesquise um pokemon"
-						// onChange={}
+						onChange={(e) => pokemonFilter(e.target.value)}
 					/>
 					<IconButton type="button" sx={{ p: '10px' }} aria-label="search">
 						<SearchIcon />

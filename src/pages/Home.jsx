@@ -25,6 +25,13 @@ export default function Home() {
 
   const [data, setData] = useState([]);
 
+  const [filter, setFilter] = useState("");
+
+  
+  const pokemonFilter = (nome) => {
+    setFilter(nome);
+  };
+
   useEffect(() => {
     getApiData();
   }, []);
@@ -45,14 +52,15 @@ export default function Home() {
     }
   };
 
+
   return (
     <>
       <Container sx={{ paddingBottom: 5 }}>
         <Grid container spacing={2}>
           <Cabecalho />
-          <PesquisaPokemon />
+          <PesquisaPokemon pokemonFilter={pokemonFilter} />
 
-          {data.map((pokemon, index) => (
+          {data.filter(pokemon => pokemon.name.includes(filter)).map((pokemon, index) => (
             <Grid item key={index} xs={12} sm={4} md={2}>
               <CardPokemon pokemon={pokemon} types={pokemon.types} />
             </Grid>
